@@ -1,0 +1,26 @@
+<!-- search_jobs.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Job Listings</title>
+</head>
+<body>
+    <h1>Search Job Listings</h1>
+    <form method="get" action="{% url 'search_jobs' %}">
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for job in job_listings %}
+            <li>
+                {{ job.title }} - {{ job.company }}
+                <a href="{% url 'edit_job' job.id %}">Edit</a>
+                <a href="{% url 'delete_job' job.id %}">Delete</a>
+            </li>
+        {% empty %}
+            <p>No job listings match your search.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
